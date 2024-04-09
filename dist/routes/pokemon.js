@@ -53,6 +53,36 @@ var getPokemons = function (req, res) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); };
+/**
+ * @openapi
+ * '/pokemon/get/{pokeId}':
+ *  get:
+ *     tags:
+ *     - Pokemons
+ *     summary: Get a all specific pokemon data
+ *     parameters:
+ *      - name: pokeId
+ *        in: path
+ *        description: The id of the pokemon
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Product not found
+ *
+ * @openapi
+ *  '/pokemon/get':
+ *  get:
+ *     tags:
+ *     - Pokemons
+ *     summary: Get a all pokemons
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Product not found
+ */
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 routes.get('/get/:pokeId?', getPokemons);
 export { routes };

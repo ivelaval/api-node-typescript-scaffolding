@@ -19,9 +19,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"]
-    },
+    // "rootDir": "./src",
     "lib": ["ESNext"]
   },
   "exclude": ["node_modules", "./dist/**/*", "__test__"]

@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { dynamicRoutes } from './routes/index.js';
 import { isInvalid } from './utils/strings.js';
+import swaggerInit from './utils/swagger.js';
 const { PORT } = process.env;
 
 if (isInvalid(PORT)) {
@@ -19,12 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
-
 app.use(dynamicRoutes);
 
 app.get('/ping', (req, res) => {
   res.send('pong!');
 });
+
+swaggerInit(app, PORT, '1.0.0');
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

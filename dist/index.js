@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { dynamicRoutes } from './routes/index.js';
 import { isInvalid } from './utils/strings.js';
+import swaggerInit from './utils/swagger.js';
 var PORT = process.env.PORT;
 if (isInvalid(PORT)) {
     throw new Error('Server port not was pre-configured');
@@ -21,6 +22,7 @@ app.use(dynamicRoutes);
 app.get('/ping', function (req, res) {
     res.send('pong!');
 });
+swaggerInit(app, PORT, '1.0.0');
 app.listen(PORT, function () {
     console.log("Server is listening on port ".concat(PORT));
 });

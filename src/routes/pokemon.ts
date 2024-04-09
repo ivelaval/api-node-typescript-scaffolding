@@ -11,6 +11,36 @@ const getPokemons = async (req: Request, res: Response): Promise<void> => {
   res.send(response);
 };
 
+/**
+ * @openapi
+ * '/pokemon/get/{pokeId}':
+ *  get:
+ *     tags:
+ *     - Pokemons
+ *     summary: Get a all specific pokemon data
+ *     parameters:
+ *      - name: pokeId
+ *        in: path
+ *        description: The id of the pokemon
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Product not found
+ *
+ * @openapi
+ *  '/pokemon/get':
+ *  get:
+ *     tags:
+ *     - Pokemons
+ *     summary: Get a all pokemons
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Product not found
+ */
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 routes.get('/get/:pokeId?', getPokemons);
 
