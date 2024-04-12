@@ -7,10 +7,11 @@ import bodyParser from 'body-parser';
 import { dynamicRoutes } from './routes/index.js';
 import { isInvalid } from './utils/strings.js';
 import swaggerInit from './utils/swagger.js';
+import logger from './utils/logger.js';
 const { PORT } = process.env;
 
 if (isInvalid(PORT)) {
-  throw new Error('Server port not was pre-configured');
+  logger.error(new Error('Server port not was pre-configured'));
 }
 
 const app = express();
@@ -29,5 +30,5 @@ app.get('/ping', (req, res) => {
 swaggerInit(app, PORT, '1.0.0');
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+  logger.info(`Server is listening on port ${PORT}`);
 });

@@ -3,7 +3,11 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import log from './logger.js';
 
-const swaggerDocs = (app: Express, port: string, version: string): void => {
+const swaggerDocs = (
+  app: Express,
+  port: string | undefined,
+  version: string
+): void => {
   const options: swaggerJsdoc.Options = {
     definition: {
       openapi: '3.0.0',
@@ -30,10 +34,8 @@ const swaggerDocs = (app: Express, port: string, version: string): void => {
   };
 
   const swaggerSpec = swaggerJsdoc(options);
-  // Swagger page
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-  // Docs in JSON format
   app.get('/docs.json', (req: Request, res: Response) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
