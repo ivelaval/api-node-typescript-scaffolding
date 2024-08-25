@@ -40,13 +40,12 @@ const localeOptions: Intl.DateTimeFormatOptions | undefined = {
 const isIsoDate = (str: string): boolean => {
   if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(str)) return false;
   const d = new Date(str);
-  return d instanceof Date && !isNaN(d.getTime()) && d.toISOString() === str;
+  return (
+    d instanceof Date && !Number.isNaN(d.getTime()) && d.toISOString() === str
+  );
 };
 
-export const getNumberAsString = (
-  number: number,
-  digits: number = 2
-): string => {
+export const getNumberAsString = (number: number, digits = 2): string => {
   return number.toLocaleString(locale, {
     minimumIntegerDigits: digits,
     useGrouping: false
@@ -85,8 +84,10 @@ const getDates = (req: Request, res: Response): void => {
   let now: Date;
 
   if (isIsoDate(dateTimeAsString)) {
-    const dateTimeAsStringWithoutMilliseconds =
-      dateTimeAsString.slice(0, -5) + 'Z';
+    const dateTimeAsStringWithoutMilliseconds = `${dateTimeAsString.slice(
+      0,
+      -5
+    )}Z`;
     now = new Date(dateTimeAsStringWithoutMilliseconds);
   } else {
     now = new Date();

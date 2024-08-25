@@ -1,13 +1,17 @@
 import { Router, type Request, type Response } from 'express';
-import { httpClient } from '../plugins/httpClient.plugin.js';
+import { httpClient } from '../../plugins/httpClient.plugin.js';
 
 const routes = Router();
 
 const getPokemons = async (req: Request, res: Response): Promise<void> => {
   const pokemonId = req.params.pokeId ?? '';
-  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+  const url = 'https://fakeresponder.com/?sleep=3000'; //`https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
 
-  const response = await httpClient.get(url);
+  const response = await httpClient<unknown>({
+    url,
+    method: 'GET',
+    retries: 3
+  });
   res.send(response);
 };
 

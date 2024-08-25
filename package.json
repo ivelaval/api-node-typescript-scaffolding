@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "pnpm build && node dist/index.js",
-    "dev": "pnpm run \"/dev:/\"",
+    "dev": "pnpm build && pnpm run \"/dev:/\"",
     "debug:watch": "nodemon --inspect src/index.ts",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "dev:node": "node --enable-source-maps --no-warnings --watch dist/index.js",

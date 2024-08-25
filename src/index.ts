@@ -9,6 +9,10 @@ import { isInvalid } from './utils/strings.js';
 import swaggerInit from './utils/swagger.js';
 import logger from './utils/logger.js';
 const { PORT } = process.env;
+import {
+  notFoundMiddleware,
+  errorHandlerMiddleware
+} from './middlewares/errorHandler.js';
 
 if (isInvalid(PORT)) {
   logger.error(new Error('Server port not was pre-configured'));
@@ -21,6 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
+// app.use(notFoundMiddleware);
+
 app.use(dynamicRoutes);
 
 app.get('/ping', (req, res) => {
